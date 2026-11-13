@@ -1,0 +1,99 @@
+/* Aplikasi kandidat Phone Screening PT Mitra Prodin. Satu kolom selebar HP, tanpa font atau pustaka luar. */
+:root{
+  --bg:#f2f5f4; --surface:#fff; --sunken:#e9eeec; --ink:#16211e; --muted:#5f6d68; --line:#d5dcd9;
+  --accent:#0f6b5c; --accent-soft:#dcefe9; --on-accent:#fff;
+  --rec:#c0392b; --rec-soft:#fbe6e3; --warn:#96610f; --warn-soft:#fbf0d9; --ok:#1f7a4a; --ok-soft:#dff3e7;
+  --stage:#0e1513; --on-stage:#e6ecea;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#111615; --surface:#1a211f; --sunken:#222b28; --ink:#e7ecea; --muted:#96a39e; --line:#313b38;
+    --accent:#4cc2a3; --accent-soft:#1b302a; --on-accent:#0b1412;
+    --rec:#ec7b6f; --rec-soft:#3a1f1c; --warn:#dba94f; --warn-soft:#33290f; --ok:#62c48d; --ok-soft:#173021;
+    --stage:#070a09; color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+h1,h2,h3,p{margin:0}
+h2{font-size:1.22rem; font-weight:700; line-height:1.3}
+h3{font-size:1rem; font-weight:700}
+.shell{max-width:460px; margin:0 auto; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:16px 16px 20px; display:flex; flex-direction:column; gap:14px}
+.brand{display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:.86rem}
+.brand span{color:var(--accent); font-weight:700}
+.chips{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+.stack{display:flex; flex-direction:column; gap:14px}
+.tight{gap:6px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.nowrap{flex-wrap:nowrap}
+.spread{display:flex; gap:10px; align-items:center; justify-content:space-between}
+.small{font-size:.875rem} .muted{color:var(--muted)} .center{text-align:center} .pad{padding:28px 0}
+.num{font-variant-numeric:tabular-nums}
+
+button{font:inherit; cursor:pointer; border-radius:12px; border:1px solid var(--line); background:var(--surface); color:var(--ink); padding:12px 16px; font-weight:600; min-height:48px; touch-action:manipulation}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+button.primary{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+button.rec{background:var(--rec); border-color:var(--rec); color:#fff}
+button.block{width:100%}
+button.sm{min-height:36px; padding:6px 12px; font-size:.875rem}
+button.link{border:0; background:none; padding:6px 0; min-height:0; color:var(--accent); font-size:.9rem; text-decoration:underline; text-align:left}
+button:disabled{opacity:.5; cursor:not-allowed}
+input[type=text],input[type=tel],textarea{font:inherit; width:100%; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px}
+textarea{resize:vertical; min-height:140px}
+input:disabled,textarea:disabled{background:var(--sunken)}
+label.f{display:flex; flex-direction:column; gap:4px}
+label.f > span{font-size:.82rem; font-weight:600; color:var(--muted)}
+label.chk{display:flex; gap:10px; align-items:flex-start; font-size:.92rem}
+label.chk input{margin:3px 0 0; flex:none; width:22px; height:22px; accent-color:var(--accent)}
+
+.badge{display:inline-flex; align-items:center; gap:5px; font-size:.76rem; font-weight:700; padding:3px 10px; border-radius:999px; background:var(--sunken); color:var(--muted); white-space:nowrap}
+.badge.acc{background:var(--accent-soft); color:var(--accent)}
+.badge.ok{background:var(--ok-soft); color:var(--ok)}
+.badge.warn{background:var(--warn-soft); color:var(--warn)}
+.badge.rec{background:var(--rec-soft); color:var(--rec)}
+.note{background:var(--sunken); border-radius:12px; padding:12px; font-size:.875rem}
+.note.warn{background:var(--warn-soft); color:var(--ink)}
+.note.err{background:var(--rec-soft); color:var(--ink)}
+
+.bar{height:6px; background:var(--sunken); border-radius:999px; overflow:hidden}
+.bar > i{display:block; height:100%; width:0; background:var(--accent); transition:width .3s}
+.timer{font:700 .9rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.timer.low{color:var(--rec)}
+
+.stage{position:relative; background:var(--stage); color:var(--on-stage); border-radius:14px; aspect-ratio:4/3; overflow:hidden; display:grid; place-items:center}
+.stage.audio{aspect-ratio:16/7}
+.stage video{width:100%; height:100%; object-fit:cover; display:block; background:#000}
+.stage video.mirror{transform:scaleX(-1)}
+.stage audio{width:calc(100% - 24px)}
+.stage .tag{position:absolute; left:10px; top:10px; background:rgba(0,0,0,.6); color:#fff; font-size:.76rem; font-weight:700; padding:4px 9px; border-radius:999px; display:flex; align-items:center; gap:6px}
+.stage .clock{position:absolute; right:10px; top:10px; background:rgba(0,0,0,.6); color:#fff; font:700 .84rem ui-monospace,Menlo,Consolas,monospace; padding:4px 9px; border-radius:8px}
+.stage .idle{text-align:center; font-size:.9rem; color:#aab6b1; padding:0 18px}
+.stage .lvl.over{position:absolute; left:10px; bottom:10px; height:26px; background:rgba(0,0,0,.6); padding:4px 8px; border-radius:8px}
+.lvl{display:flex; gap:5px; align-items:center; height:44px}
+.lvl i{display:block; width:6px; height:6px; border-radius:3px; background:#4cc2a3}
+.dot{width:9px; height:9px; border-radius:50%; background:#ff5b4d; display:inline-block; animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:.2}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none} .bar > i{transition:none}}
+
+.choices{display:flex; flex-direction:column; gap:8px}
+.choice{display:flex; gap:10px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:13px 12px; cursor:pointer}
+.choice input{width:20px; height:20px; flex:none; accent-color:var(--accent)}
+.choice.sel{border-color:var(--accent); background:var(--accent-soft)}
+.scale{display:grid; grid-template-columns:repeat(5,1fr); gap:8px}
+.scale button{padding:12px 0}
+.scale button.sel{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+.mark{width:56px; height:56px; border-radius:50%; display:grid; place-items:center; font-size:1.6rem; font-weight:700; margin:8px auto 0; background:var(--sunken); color:var(--muted)}
+.mark.ok{background:var(--ok-soft); color:var(--ok)}
+.mark.warn{background:var(--warn-soft); color:var(--warn)}
+ul.list{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+ul.list li{display:flex; gap:10px; align-items:center; justify-content:space-between; border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:.9rem}
+ul.plain{margin:0; padding-left:18px; font-size:.875rem; color:var(--muted)}
+
+.toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom)); transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:14px; font-size:.9rem; font-weight:600; opacity:0; pointer-events:none; transition:opacity .2s; z-index:20; width:max-content; max-width:calc(100% - 32px); text-align:center}
+.toast.show{opacity:1}
+@media (max-width:480px){ body{padding-left:0; padding-right:0; padding-top:0; background:var(--surface)} .shell{border:0; border-radius:0; padding-top:max(14px,env(safe-area-inset-top))} }
+/* Tinggi tetap supaya tombol di bawahnya tidak bergeser saat status unggahan berubah */
+#upline{min-height:64px; justify-content:center}

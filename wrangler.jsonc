@@ -1,0 +1,28 @@
+{
+  // Aplikasi kandidat Phone Screening PT Mitra Prodin.
+  // Lihat README.md sebelum deploy: nama bucket dan alamat web rekrutmen WAJIB disesuaikan.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mp-phone-screening",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Semua permintaan lewat Worker dulu supaya /s/{token} dan header keamanan diatur di satu tempat.
+    "run_worker_first": true
+  },
+  "r2_buckets": [
+    // Harus bucket yang sama dengan R2_BUCKET di .env web rekrutmen.
+    { "binding": "RECORDINGS", "bucket_name": "mp-phone-screening" }
+  ],
+  "vars": {
+    // Alamat dasar web rekrutmen, tanpa /api di belakang. Contoh: https://recruitment.mitraprodin.com
+    "RECRUITMENT_API_URL": "",
+    // "1" hanya untuk pengembangan lokal (diatur lewat .dev.vars). Di produksi HARUS "0".
+    "MOCK_API": "0",
+    // Batas atas ukuran satu berkas rekaman, dalam MB.
+    "MAX_UPLOAD_MB": "60"
+  },
+  "observability": { "enabled": true }
+  // Secret (jangan ditulis di sini): PHONE_SCREENING_API_KEY  ->  wrangler secret put PHONE_SCREENING_API_KEY
+}

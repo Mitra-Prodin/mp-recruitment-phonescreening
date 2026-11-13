@@ -1,0 +1,16 @@
+{
+  "name": "mp-phone-screening-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aplikasi kandidat Phone Screening PT Mitra Prodin (Cloudflare Workers)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit && node --check public/app.js",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261110.1",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.0.0"
+  }
+}

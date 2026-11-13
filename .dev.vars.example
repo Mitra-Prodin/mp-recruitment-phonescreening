@@ -1,0 +1,8 @@
+# Salin menjadi .dev.vars untuk pengembangan lokal. Berkas .dev.vars tidak ikut di-commit.
+
+# 1 = data tiruan (tidak memanggil web rekrutmen). 0 = panggil web rekrutmen sungguhan.
+MOCK_API=1
+
+# Dipakai bila MOCK_API=0:
+# RECRUITMENT_API_URL=http://127.0.0.1:8000
+# PHONE_SCREENING_API_KEY=isi-sama-dengan-env-web-rekrutmen
